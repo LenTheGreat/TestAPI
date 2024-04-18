@@ -8,7 +8,10 @@ import java.util.List;
 @Service
 public interface AccountService {
     List<AccountModel> getAllAccounts();
-    AccountModel findAccountByid(long accountId);
+    AccountModel createAccount(AccountModel accountModel);
+    AccountModel updateAccount(AccountModel accountModel, long accountId);
+    String removeAccount(Long id);
+    AccountModel findAccountById(long accountId);
     List<AccountModel> searchByFirstName(String firstName);
     List<AccountModel> searchByMiddleName(String middleName);
     List<AccountModel> searchByLastName(String lastName);

@@ -14,14 +14,14 @@ public class AccountController {
     @Autowired
     private AccountService accountService;
 
-    @GetMapping(path="/allAccounts")
+    @GetMapping(path="/getAll")
     public List<AccountModel> getAllAccounts(){
         return accountService.getAllAccounts();
     }
 
-    @GetMapping(path="/{accountId}")
-    public AccountModel findAccountById(@PathVariable(value = "accountId")long accountId){
-        return accountService.findAccountByid(accountId);
+    @GetMapping(path="/id")
+    public AccountModel findAccountById(@RequestParam(value = "accountId", required = true) long accountId){
+        return accountService.findAccountById(accountId);
     }
 
     @GetMapping(path="/search")
@@ -31,4 +31,23 @@ public class AccountController {
     {
         return accountService.searchAccount(firstName,middleName,lastName);
     }
+
+    @PostMapping(path="/create")
+    public void  addAccount(@RequestBody AccountModel accountModel ){
+          accountService.createAccount(accountModel);
+    }
+
+    @PutMapping(path="/update/{accountId}")
+    public void updateAccount(@RequestBody AccountModel accountModel, @PathVariable long accountId){
+        accountService.updateAccount(accountModel,accountId);
+    }
+
+    @DeleteMapping(path="/delete")
+    public void deleteAccount(@RequestParam(value = "accountId") Long accountId){
+        accountService.removeAccount(accountId);
+    }
+
+
+
+
 }
